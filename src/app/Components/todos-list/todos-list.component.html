@@ -1,0 +1,25 @@
+<div class="p-4">
+  <h2 class="text-xl font-semibold mb-4">Todo List</h2>
+  <div *ngIf="(todos$ | async)?.length === 0" #elseBlock>No Todos!</div>
+
+<div>
+  {{
+  todos$ | async
+
+  }}
+</div>
+
+  <ng-template>
+    <ul *ngIf="todos$ | async as todos">
+      <li *ngFor="let todo of todos" class="mb-2 p-2 bg-white shadow rounded">
+        {{ todo.todoName }} -
+        <span
+          [class.text-green-500]="todo.isCompleted"
+          [class.text-red-500]="!todo.isCompleted"
+        >
+          {{ todo.isCompleted ? "Completed" : "Pending" }}
+        </span>
+      </li>
+    </ul>
+  </ng-template>
+</div>
