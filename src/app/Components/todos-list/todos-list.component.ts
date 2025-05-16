@@ -1,24 +1,18 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { AsyncPipe, CommonModule } from '@angular/common';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { Todo } from '../../Models/todo.model';
-import { getTodos } from '../../Store/todo.selector';
-import { CommonModule } from '@angular/common';
-
+import { selectAllTodos, totalTodos } from '../../Store/todo.selector';
 @Component({
   selector: 'app-todos-list',
-  imports: [CommonModule],
+  imports: [CommonModule, AsyncPipe],
   templateUrl: './todos-list.component.html',
   styleUrl: './todos-list.component.css',
 })
-export class TodosListComponent implements OnInit{
-  store = inject(Store)
+export class TodosListComponent {
+  private store = inject(Store);
+  todos$ = this.store.select(selectAllTodos);
 
-  todos$! :  Observable<Todo[]>
-
-  ngOnInit(): void {
-    console.log('Store: ', this.store)
-    this.todos$ = this.store.select(getTodos)
-    console.log('Todos: ', this.todos$)
+  ngOnInit() {
+    this.todos$.subscribe((todos) => console.log('Actual Todos:', todos));
   }
 }

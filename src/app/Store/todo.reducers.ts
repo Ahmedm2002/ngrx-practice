@@ -22,6 +22,7 @@ export const todosReducer = createReducer(
   on(removeTodo, (state, { todoId }) => ({
     ...state,
     todos: state.todos.filter((todo) => todo.id != todoId),
+    totalNumber: state.todos.length,
   })),
 
   on(updateTodo, (state, { updatedTodo }) => ({

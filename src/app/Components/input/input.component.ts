@@ -13,17 +13,15 @@ export class InputComponent {
   newTodo: string = '';
   addNewTodo() {
     const randomId = Math.floor(Math.random() * 99999);
-    console.log('RandomId: ', randomId);
-    console.log('You entered: ', this.newTodo);
-    this.newTodo = '';
     this.store.dispatch(
       addTodo({
-        todo : {
+        todo: {
           id: randomId,
-          todoName : this.newTodo,
-          isCompleted : false
-        }
+          todoName: this.newTodo,
+          isCompleted: false,
+        },
       })
     );
+    this.newTodo = '';
   }
 }
