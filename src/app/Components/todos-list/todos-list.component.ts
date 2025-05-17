@@ -11,8 +11,4 @@ import { selectAllTodos, totalTodos } from '../../Store/todo.selector';
 export class TodosListComponent {
   private store = inject(Store);
   todos$ = this.store.select(selectAllTodos);
-
-  ngOnInit() {
-    this.todos$.subscribe((todos) => console.log('Actual Todos:', todos));
-  }
 }
