@@ -11,17 +11,24 @@ import { addTodo } from '../../Store/todo.actions';
 export class InputComponent {
   public store = inject(Store);
   newTodo: string = '';
+  newDate: string = '';
   addNewTodo() {
     const randomId = Math.floor(Math.random() * 99999);
-    this.store.dispatch(
-      addTodo({
-        todo: {
-          id: randomId,
-          todoName: this.newTodo,
-          isCompleted: false,
-        },
-      })
-    );
-    this.newTodo = '';
+    const currentDate = new Date();
+    if (new Date(this.newDate) < currentDate || new Date(this.newDate) == currentDate) {
+      console.log('Date cannot be past or on the same day');
+    } else {
+      this.store.dispatch(
+        addTodo({
+          todo: {
+            id: randomId,
+            todoName: this.newTodo,
+            isCompleted: false,
+            date: this.newDate,
+          },
+        })
+      );
+      this.newTodo = '';
+    }
   }
 }

@@ -2,19 +2,25 @@
   <div *ngIf="todos.length === 0; else todoList">No Todos!</div>
 
   <ng-template #todoList>
-    <ul>
-      <li
-        *ngFor="let todo of todos"
-        class="mb-2 mx-2 md:mx-auto p-2 bg-white shadow rounded"
-      >
-        {{ todo.todoName }} -
-        <span
-          [class.text-green-500]="todo.isCompleted"
-          [class.text-red-500]="!todo.isCompleted"
-        >
-          {{ todo.isCompleted ? "Completed" : "Pending" }}
-        </span>
-      </li>
-    </ul>
+    <table>
+      <thead>
+        <tr>
+          <th>Sr. No</th>
+          <th>Toggle Status</th>
+          <th>Task Name</th>
+          <th>Status</th>
+          <th>Due Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let todo of todos; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td><input type="checkbox" [checked]="todo.isCompleted" /></td>
+          <td>{{ todo.todoName }}</td>
+          <td> {{todo.isCompleted ? `Completed`: `Pending`}}</td>
+          <td>{{ todo.date }}</td>
+        </tr>
+      </tbody>
+    </table>
   </ng-template>
 </ng-container>

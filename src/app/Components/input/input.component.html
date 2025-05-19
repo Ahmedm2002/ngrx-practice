@@ -7,10 +7,11 @@
     class="px-2 py-2 border w-64 border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
     [(ngModel)]="newTodo"
   />
+  <input type="date" [(ngModel)]="newDate" />
   <button
-    class="px-4 py-2 bg-blue-500 text-white font-medium rounded-md hover:bg-blue-600 transition duration-200"
+    class="px-4 py-2 bg-blue-500 text-white font-medium rounded-md hover:bg-blue-600 transition duration-200 disabled:bg-blue-300"
     (click)="addNewTodo()"
-    [disabled]="newTodo.length === 0"
+    [disabled]="newTodo.length === 0 || newDate.length === 0"
   >
     Add Todo
   </button>
