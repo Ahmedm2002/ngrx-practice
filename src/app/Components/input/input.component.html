@@ -9,7 +9,7 @@
   />
   <input type="date" [(ngModel)]="newDate" />
   <button
-    class="px-4 py-2 bg-blue-500 text-white font-medium rounded-md hover:bg-blue-600 transition duration-200 disabled:bg-blue-300"
+    class="cursor-pointer px-4 py-2 bg-blue-500 text-white font-medium rounded-md hover:bg-blue-600 transition duration-200 disabled:bg-blue-300"
     (click)="addNewTodo()"
     [disabled]="newTodo.length === 0 || newDate.length === 0"
   >

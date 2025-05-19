@@ -5,8 +5,6 @@
     <table class="text-center mt-2">
       <thead>
         <tr>
-          <th class="px-2 sm:px-6 md:px-8">Sr. No</th>
-          <th class="px-2 sm:px-6 md:px-8">Toggle Status</th>
           <th class="px-2 sm:px-6 md:px-8">Task Name</th>
           <th class="px-2 sm:px-6 md:px-8">Status</th>
           <th class="px-2 sm:px-6 md:px-8">Due Date</th>
@@ -14,13 +12,30 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let todo of todos; let i = index">
-          <td>{{ i + 1 }}</td>
-          <td><input type="checkbox" [checked]="todo.isCompleted" /></td>
-          <td>{{ todo.todoName }}</td>
-          <td [ngClass]="todo.isCompleted ? 'text-green-500' : 'text-amber-400'">{{ todo.isCompleted ? 'Completed' : 'Pending'}}</td>
+        <tr *ngFor="let todo of todos">
+          <td>
+            <input
+              type="checkbox"
+              class="mr-1"
+              [checked]="todo.isCompleted"
+              (change)="onToggle($event, todo)"
+            />{{ todo.todoName }}
+          </td>
+          <td
+            [ngClass]="todo.isCompleted ? 'text-green-500' : 'text-amber-400'"
+            
+          >
+            {{ todo.isCompleted ? "Completed" : "Pending" }}
+          </td>
           <td>{{ todo.date }}</td>
-          <td><button class="bg-red-500 p-2 rounded-xl">Delete</button></td>
+          <td>
+            <button
+              class="bg-red-500 p-2 rounded-xl text-white cursor-pointer"
+              (click)="deleteTodo(todo)"
+            >
+              Delete
+            </button>
+          </td>
         </tr>
       </tbody>
     </table>
