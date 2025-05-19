@@ -2,14 +2,15 @@
   <div *ngIf="todos.length === 0; else todoList">No Todos!</div>
 
   <ng-template #todoList>
-    <table>
+    <table class="text-center mt-2">
       <thead>
         <tr>
-          <th>Sr. No</th>
-          <th>Toggle Status</th>
-          <th>Task Name</th>
-          <th>Status</th>
-          <th>Due Date</th>
+          <th class="px-2 sm:px-6 md:px-8">Sr. No</th>
+          <th class="px-2 sm:px-6 md:px-8">Toggle Status</th>
+          <th class="px-2 sm:px-6 md:px-8">Task Name</th>
+          <th class="px-2 sm:px-6 md:px-8">Status</th>
+          <th class="px-2 sm:px-6 md:px-8">Due Date</th>
+          <th class="px-2 sm:px-6 md:px-8">Delete</th>
         </tr>
       </thead>
       <tbody>
@@ -17,8 +18,9 @@
           <td>{{ i + 1 }}</td>
           <td><input type="checkbox" [checked]="todo.isCompleted" /></td>
           <td>{{ todo.todoName }}</td>
-          <td> {{todo.isCompleted ? `Completed`: `Pending`}}</td>
+          <td [ngClass]="todo.isCompleted ? 'text-green-500' : 'text-amber-400'">{{ todo.isCompleted ? 'Completed' : 'Pending'}}</td>
           <td>{{ todo.date }}</td>
+          <td><button class="bg-red-500 p-2 rounded-xl">Delete</button></td>
         </tr>
       </tbody>
     </table>
