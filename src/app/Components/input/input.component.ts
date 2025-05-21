@@ -12,27 +12,35 @@ export class InputComponent {
   public store = inject(Store);
   newTodo: string = '';
   newDate: string = '';
+
   addNewTodo() {
     const randomId = Math.floor(Math.random() * 99999);
     const currentDate = new Date();
-    if (
+
+    if (this.newDate === '') {
+      alert('Please enter a date');
+    } else if (
       new Date(this.newDate) < currentDate ||
       new Date(this.newDate) == currentDate
     ) {
       alert('Date cannot be past or on the same day');
     } else {
-      this.store.dispatch(
-        addTodo({
-          todo: {
-            id: randomId,
-            todoName: this.newTodo,
-            isCompleted: false,
-            date: this.newDate,
-          },
-        })
-      );
-      this.newTodo = '';
-      this.newDate = ''
+      this.saveInStore(randomId);
     }
+  }
+
+  saveInStore(randomId: number) {
+    this.store.dispatch(
+      addTodo({
+        todo: {
+          id: randomId,
+          todoName: this.newTodo,
+          isCompleted: false,
+          date: this.newDate,
+        },
+      })
+    );
+    this.newTodo = '';
+    this.newDate = '';
   }
 }

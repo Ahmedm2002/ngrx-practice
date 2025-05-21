@@ -1,47 +1,115 @@
 <ng-container *ngIf="todos$ | async as todos">
-  <div *ngIf="todos.length === 0; else todoList" class="text-center text-gray-500 text-lg py-8">
+  <div
+    *ngIf="todos.length === 0; else todoList"
+    class="text-center text-gray-500 text-lg py-10"
+  >
     No Todos!
   </div>
 
   <ng-template #todoList>
-    <div class="overflow-x-auto px-4 sm:px-6 lg:px-8 py-6">
-      <div class="inline-block min-w-full shadow-md rounded-2xl overflow-hidden bg-white">
-        <table class="min-w-full divide-y divide-gray-200">
+    <div class="w-full px-4 sm:px-6 lg:px-8 py-6 flex justify-center">
+      <div
+        class="w-full max-w-6xl shadow-lg rounded-2xl overflow-hidden bg-white transition-all duration-300"
+      >
+        <table class="min-w-full table-auto divide-y divide-gray-200">
           <thead class="bg-gray-100">
             <tr>
-              <th scope="col" class="px-4 py-3 text-left text-sm font-medium text-gray-700">Task Name</th>
-              <th scope="col" class="px-4 py-3 text-left text-sm font-medium text-gray-700">Status</th>
-              <th scope="col" class="px-4 py-3 text-left text-sm font-medium text-gray-700">Due Date</th>
-              <th scope="col" class="px-4 py-3 text-left text-sm font-medium text-gray-700">Actions</th>
+              <th
+                class="px-4 py-3 text-left text-sm font-semibold text-gray-700 w-1/3"
+              >
+                Task Name
+              </th>
+              <th
+                class="px-4 py-3 text-left text-sm font-semibold text-gray-700 w-1/6"
+              >
+                Status
+              </th>
+              <th
+                class="px-4 py-3 text-left text-sm font-semibold text-gray-700 w-1/6"
+              >
+                Due Date
+              </th>
+              <th
+                class="px-4 py-3 text-left text-sm font-semibold text-gray-700 w-1/4"
+              >
+                Actions
+              </th>
             </tr>
           </thead>
-          <tbody class="divide-y divide-gray-200">
-            <tr *ngFor="let todo of todos" class="hover:bg-gray-50 transition-all">
-              <td class="px-4 py-3 flex items-center">
+          <tbody class="divide-y divide-gray-100">
+            <tr
+              *ngFor="let todo of todos"
+              class="hover:bg-gray-50 transition duration-200 ease-in-out"
+            >
+              <td class="px-4 py-3 flex items-center gap-2">
                 <input
                   type="checkbox"
-                  class="mr-2 h-4 w-4 text-indigo-600 rounded border-gray-300 focus:ring-indigo-500"
+                  class="h-4 w-4 text-indigo-600 rounded border-gray-300 focus:ring-indigo-500"
                   [checked]="todo.isCompleted"
                   (change)="onToggle($event, todo)"
                 />
-                <span class="text-gray-800 text-sm font-medium">{{ todo.todoName }}</span>
+                <span class="text-gray-800 text-sm break-words">{{
+                  todo.todoName
+                }}</span>
               </td>
-              <td>
+              <td class="px-4 py-3">
                 <span
                   class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full"
-                  [ngClass]="todo.isCompleted ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-800'"
+                  [ngClass]="
+                    todo.isCompleted
+                      ? 'bg-green-100 text-green-700'
+                      : 'bg-yellow-100 text-yellow-800'
+                  "
                 >
-                  {{ todo.isCompleted ? 'Completed' : 'Pending' }}
+                  {{ todo.isCompleted ? "Completed" : "Pending" }}
                 </span>
               </td>
-              <td class="text-sm text-gray-600">{{ todo.date }}</td>
-              <td>
-                <button
-                  class="bg-red-500 hover:bg-red-600 text-white text-xs font-semibold px-3 py-1 rounded-lg shadow-sm"
-                  (click)="deleteTodo(todo)"
-                >
-                  Delete
-                </button>
+              <td class="px-4 py-3 text-sm text-gray-600">{{ todo.date }}</td>
+              <td class="px-4 py-3">
+                <div class="flex flex-wrap gap-2 items-center">
+                  <button
+                    title="Update this task"
+                    class="flex items-center gap-1 bg-blue-500 hover:bg-blue-600 text-white text-xs font-medium px-4 py-1.5 rounded-md shadow-sm transition duration-200"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-4 w-4"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M11 5h6m-3-3v6m4 4v6a2 2 0 01-2 2H9l-4 4V5a2 2 0 012-2h4"
+                      />
+                    </svg>
+                    Update
+                  </button>
+
+                  <button
+                    title="Delete this task"
+                    class="flex items-center gap-1 bg-red-500 hover:bg-red-600 text-white text-xs font-medium px-4 py-1.5 rounded-md shadow-sm transition duration-200"
+                    (click)="deleteTodo(todo)"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-4 w-4"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M6 18L18 6M6 6l12 12"
+                      />
+                    </svg>
+                    Delete
+                  </button>
+                </div>
               </td>
             </tr>
           </tbody>
