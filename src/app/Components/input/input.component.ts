@@ -32,6 +32,7 @@ export class InputComponent {
         })
       );
       this.newTodo = '';
+      this.newDate = ''
     }
   }
 }
